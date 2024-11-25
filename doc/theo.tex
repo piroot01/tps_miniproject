@@ -1,0 +1,44 @@
+\section{Theory}
+
+Consider a Hilbert space $\mathbb{H}$ over $L^2(\mathbb{R}^n)$ equipped with the inner product defined as
+\begin{equation}
+    \label{eq:theo_1}
+    \braket{f}{g} = \int_{\mathbb{R}} f(x) g(x) \dd{x}.
+\end{equation}
+We are interested in the inhomogeneous operator equation
+\begin{equation}
+    \label{eq:theo_2}
+    \mathcal{L}(f) = g,
+\end{equation}
+where $\mathcal{L}: D\subseteq \mathbb{H} \to \mathbb{H}$ denotes a linear operator, $g$ represents a known function, and $f$ is the unknown function to be determined. To solve this equation, we employ a countable basis $\mathfrak{B} = (f_1, f_2, \dots)$ of $\mathbb{H}$ and express $f$ as an infinite series expansio
+\begin{equation}
+    \label{eq:theo_3}
+    f = \sum_{l = 1}^{\infty} c_l f_l,
+\end{equation}
+where $\left(f_l\right)_{l = 1}^{\infty}$ is often called set of expansion functions. Substituting the expansion \eqref{eq:theo_3} into equation \eqref{eq:theo_2} yields
+\begin{equation}
+    \label{eq:theo_4}
+    \sum_{l = 1}^{\infty} c_l \mathcal{L}(f_l) = g.
+\end{equation}
+Let us introduce another basis $\mathfrak{C} = (w_1, w_2, \dots)$ of $\mathbb{H}$, commonly referred to as weighting functions or test functions. Taking the inner product of equation \eqref{eq:theo_4} with each $w_k$ leads to the system
+\begin{equation}
+    \label{eq:theo_5}
+    \sum_{k = 1}^{\infty} c_l \braket{w_k}{\mathcal{L}(f_l)} = \braket{w_k}{g}\quad k = 1,2,\dots
+\end{equation}
+The system of equations \eqref{eq:theo_5} can be expressed in matrix form as
+\begin{equation}
+    \label{eq:theo_6}
+    \mathbf{L}\mathbf{F} = \mathbf{G},
+\end{equation}
+where $\mathbf{L}_{kl} = \braket{w_k}{\mathcal{L}(f_l)}$, $\mathbf{F}_l = c_l$, and $\mathbf{G}_k = \braket{w_k}{g}$.
+For a regular matrix $\mathbf{L}$, the solution is given by
+\begin{equation}
+    \label{eq:theo_7}
+    \mathbf{F} = \mathbf{L}^{-1}\mathbf{G}.
+\end{equation}
+Consequently, substituting \eqref{eq:theo_7} into \eqref{eq:theo_4}, we obtain the solution
+\begin{equation}
+    \label{eq:theo_8}
+    f = \sum_{l = 1}^{\infty}\mathbf{F}_l f_l.
+\end{equation}
+The nature of the solution—whether approximate or exact—depends on the properties of the operator $\mathcal{L}$ and the choice of expansion functions $f_l$ and test functions $w_k$. While the matrix $\mathbf{L}$ may be of infinite order with a theoretically obtainable inverse, practical implementations typically use finite-dimensional bases, allowing for numerical matrix inversion techniques. In the special case where the test functions are chosen identical to the expansion functions ($w_k = f_k$), the method is known as the Galerkin's method~\cite{critique}.

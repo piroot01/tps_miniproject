@@ -1,0 +1,9 @@
+.gitignore
+
+# vars
+doc_name = main
+compiler = tectonic
+
+# it is time to compile
+: $(doc_name).tex |> $(compiler) -r 2 %f |> %B.pdf
+

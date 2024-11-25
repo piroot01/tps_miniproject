@@ -3,10 +3,10 @@ clc; clearvars; close all;
 
 addpath('~/Documents/MATLAB/matlab2tikz-master/src/');
 
-m = 10;
-n = 10;
-a = 0.1;
-b = 0.1;
+m = 15;
+n = 15;
+a = 0.2;
+b = 0.2;
 
 plate_mesh = rect_mesh(m, n, a, b);
 
@@ -15,7 +15,7 @@ vertex_indices = plate_mesh.vertex_idx();
 vertex_coordinates = plate_mesh.vertex_coords();
 patch_center_coordinates = plate_mesh.patch_centers_coords();
 
-quadrature_order = 4;
+quadrature_order = 3;
 
 [p, w] = gauss_legendre_quadrature_2d.compute(quadrature_order, 0, 1);
 
@@ -63,25 +63,30 @@ tic;
 e0 = 8.854187e-12;
 M = M ./ (4 * pi * e0);
 
+% make the inverse matrix
 M_inv = inv(M);
-S = ones(length(patch_indices), 1) * (a * b);
-C = M_inv * S;
-C = flipud(reshape(C, m, n));
 
-x = linspace(0, n * a, n + 1);
-y = linspace(0, m * b, m + 1);
+% create a vector of surface areas
+S = ones(length(patch_indices), 1) * (a * b);
+
+% compute the charge density vector
+Q = M_inv * S;
+Q = flipud(reshape(Q, m, n));
+
+% plot
+x = linspace(0, n * a, n);
+y = linspace(0, m * b, m);
 [X, Y] = meshgrid(x, y);
-Z = repmat(C, 2, 2) * 10^12;
 
 figure('Name','Potential Distribution');
-s = surf(X(1:m, 1:n), Y(1:m, 1:n), Z(1:m, 1:n));
-xlabel('x');
-ylabel('y');
-zlabel('pC');
+s = surf(X, Y, Q);
+xlabel('x [m]');
+ylabel('y [m]');
+zlabel('charge density [pC/m^2]');
 s.EdgeColor = 'black';
 s.FaceColor = 'white';
 s.LineWidth = 3;
 ax = gca;
 ax.Color = 'none';
-toc;
 
+toc;

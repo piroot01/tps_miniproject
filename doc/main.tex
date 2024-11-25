@@ -1,18 +1,57 @@
 \documentclass{article}
 
 \usepackage{geometry}
+\usepackage{lipsum}
+\usepackage{physics}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+
+\usepackage[colorlinks]{hyperref}
+\hypersetup{
+    colorlinks=true, % false: boxed links; true: colored links
+    linkcolor=blue!70!black, % color of internal links
+    citecolor=red!70!black, % color of links to bibliography
+    filecolor=blue!70!black, % color of file links
+    urlcolor=blue!70!black, % color of external links
+}
 
 \geometry{
-    margin=3cm
+    margin=2in
 }
 
 \usepackage{pgfplots}
 
 \begin{document}
 
-\begin{figure}[h!]
-    \centering
-    \input{plot50}
-\end{figure}
+\input{title_page}
+
+\noindent\textbf{\Large Abstract}
+
+\vspace{1em}
+
+\input{abstract}
+
+\newpage
+
+\input{contents}
+
+\newpage
+
+\input{intro}
+
+\input{theo}
+
+\input{impl}
+
+\input{disc}
+
+\bibliographystyle{IEEEtran}
+\bibliography{bib/core.bib, bib/extra.bib}
+
+%\begin{figure}[h!]
+%    \centering
+%    plot50
+%    \input{plot50}
+%\end{figure}
 
 \end{document}
